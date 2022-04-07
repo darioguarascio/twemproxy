@@ -1,0 +1,19 @@
+version: "3.5"
+
+
+services:
+  twemproxy:
+    network_mode: host
+
+    image: darioguarascio/twemproxy:latest
+
+    build:
+      context: ./
+
+    command: nutcracker -c /etc/twemproxy.yml
+
+    volumes:
+      - ./twemproxy.yml.example:/etc/twemproxy.yml
+
+    ports:
+      - "${TWEMPROXY_LISTEN:-127.0.0.1:6300:6300}"
